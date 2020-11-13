@@ -14,36 +14,40 @@
         <!-- Content Row -->
         <div class="row">
             <div class="col-lg-4 mb-4">
-                <form name="sentMessage" id="contactForm" novalidate>
+                <form method="post" action="">
+                    {% csrf_token %}
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>First Name*</label>
-                            <input type="text" class="form-control" id="first_name" required data-validation-required-message="Please enter your first name.">
+                            {{ form.first_name }}
                             <p class="help-block"></p>
                         </div>
                     </div>
                     <div class="controls">
                         <label>Last Name*</label>
-                        <input type="text" class="form-control" id="last_name" required data-validation-required-message="Please enter your last name.">
+                        {{ form.last_name }}
                         <p class="help-block"></p>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Email*</label>
-                            <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email.">
+                            {{ form.email }}
+                            <small style="color:red">{{ form.errors.email }}</small>
                             <p class="help-block"></p>
                         </div>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Password*</label>
-                            <input type="password" class="form-control" id="password" required data-validation-required-message="Please enter your password.">
+                            {{ form.password1 }}
                         </div>
                     </div>
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>Confirm Password*</label>
-                            <input type="password" class="form-control" id="confirm-password" required data-validation-required-message="Please confirm your password.">
+                            {{ form.password2 }}
+                            <small style="color:red">{{ form.errors.password2 }}</small>
+
                         </div>
                     </div>
                     <div id="success"></div>

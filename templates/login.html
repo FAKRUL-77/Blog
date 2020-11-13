@@ -15,6 +15,7 @@
     <div class="row">
       <div class="col-lg-4 mb-4">
         <form name="sentMessage" id="contactForm" novalidate>
+            {% csrf_token %}
           <div class="control-group form-group">
             <div class="controls">
               <label>Email*</label>
