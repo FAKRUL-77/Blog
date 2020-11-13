@@ -1,5 +1,5 @@
 from django.contrib import auth
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.db import transaction
 from django.shortcuts import redirect, render
 from django.views.generic import CreateView
@@ -10,12 +10,6 @@ from .forms import RegistrationForm, UserLoginForm
 
 
 # LOGIN VIEW ENDPOINT
-# class userLoginView(LoginView):
-#     form_class = UserLoginForm
-#     success_url = '/'
-#     template_name = 'login.html'
-
-
 def userLoginView(request):
     if not request.user.is_authenticated:
         if request.method=='POST':
@@ -49,3 +43,9 @@ class UserRegisterView(CreateView):
         user = form.save()
         user.refresh_from_db()
         return redirect('/')
+
+
+# LOGOUT VIEW ENDPOINT
+class UserLogoutView(LogoutView):
+    template_name = 'base'
+    next_page = '/'
