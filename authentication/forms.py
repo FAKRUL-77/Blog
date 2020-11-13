@@ -40,19 +40,25 @@ class UserCreationForm(forms.ModelForm):
 
 class RegistrationForm(UserCreationForm):
     first_name = forms.CharField(max_length=120,
-                                 widget=TextInput(attrs={'class': 'form-control', 'id':'first_name','type':'text', 'required data-validation-required-message':'Please enter your first name.' }))
+                                 widget=TextInput(attrs={'class': 'form-control', 'id': 'first_name', 'type': 'text',
+                                                         'required data-validation-required-message': 'Please enter your first name.'}))
     last_name = forms.CharField(max_length=120,
-                                widget=TextInput(attrs={'class': 'form-control', 'id':'last_name','type':'text', 'required data-validation-required-message':'Please enter your last name.' }))
+                                widget=TextInput(attrs={'class': 'form-control', 'id': 'last_name', 'type': 'text',
+                                                        'required data-validation-required-message': 'Please enter your last name.'}))
     email = forms.EmailField(max_length=120,
-                             widget=TextInput(attrs={'class': 'form-control', 'id':'email','type':'email', 'required data-validation-required-message':'Please enter your email.' }))
+                             widget=TextInput(attrs={'class': 'form-control', 'id': 'email', 'type': 'email',
+                                                     'required data-validation-required-message': 'Please enter your email.'}))
     password1 = forms.CharField(max_length=500,
-                                widget=TextInput(attrs={'class': 'form-control', 'id':'password','type':'password', 'required data-validation-required-message':'Please enter your password.' }))
+                                widget=TextInput(attrs={'class': 'form-control', 'id': 'password', 'type': 'password',
+                                                        'required data-validation-required-message': 'Please enter your password.'}))
     password2 = forms.CharField(max_length=500,
-                                widget=TextInput(attrs={'class': 'form-control', 'id':'confirm-password','type':'password', 'required data-validation-required-message':'Please enter your confirm-password.' }))
+                                widget=TextInput(
+                                    attrs={'class': 'form-control', 'id': 'confirm-password', 'type': 'password',
+                                           'required data-validation-required-message': 'Please enter your confirm-password.'}))
 
     class Meta(UserCreationForm.Meta):
         model = MyUser
-        fields = ('first_name','last_name','email', 'password1', 'password2',)
+        fields = ('first_name', 'last_name', 'email', 'password1', 'password2',)
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -62,9 +68,9 @@ class RegistrationForm(UserCreationForm):
 
 
 class UserLoginForm(AuthenticationForm):
-    username = forms.CharField(widget=TextInput(attrs={'class': 'form-control',
-                                                       'id': 'username',
-                                                       }))
+    email = forms.EmailField(widget=TextInput(attrs={'class': 'form-control',
+                                                    'id': 'email',
+                                                    }))
     password = forms.CharField(widget=PasswordInput(attrs={'class': 'form-control',
                                                            'id': 'password',
                                                            }))

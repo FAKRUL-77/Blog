@@ -1,18 +1,40 @@
-from django.contrib.auth import authenticate
-from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import auth
+from django.contrib.auth.views import LoginView
 from django.db import transaction
-from django.http import Http404
-from django.shortcuts import render, redirect
-
-# LOGIN VIEW ENDPOINT
+from django.shortcuts import redirect, render
 from django.views.generic import CreateView
 
+
 from authentication.models import MyUser
-from .forms import RegistrationForm
+from .forms import RegistrationForm, UserLoginForm
 
 
-def login(request):
-    return render(request, 'login.html')
+# LOGIN VIEW ENDPOINT
+# class userLoginView(LoginView):
+#     form_class = UserLoginForm
+#     success_url = '/'
+#     template_name = 'login.html'
+
+
+def userLoginView(request):
+    if not request.user.is_authenticated:
+        if request.method=='POST':
+            email = request.POST['email']
+            password = request.POST['password']
+            user = auth.authenticate(email=email, password=password)
+            if user is not None:
+                auth.login(request, user)
+                return redirect('/')
+            else:
+                return render(request, 'login.html')
+        else:
+            form = UserLoginForm
+            context = {
+                'form':form,
+            }
+            return render(request, 'login.html', context)
+    else:
+        return redirect('/')
 
 
 # REGISTRATION VIEW ENDPOINT
