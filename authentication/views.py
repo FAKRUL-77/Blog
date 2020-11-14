@@ -9,28 +9,6 @@ from authentication.models import MyUser
 from .forms import RegistrationForm, UserLoginForm
 
 
-# LOGIN VIEW ENDPOINT
-def userLoginView(request):
-    if not request.user.is_authenticated:
-        if request.method=='POST':
-            email = request.POST['email']
-            password = request.POST['password']
-            user = auth.authenticate(email=email, password=password)
-            if user is not None:
-                auth.login(request, user)
-                return redirect('/')
-            else:
-                return render(request, 'login.html')
-        else:
-            form = UserLoginForm
-            context = {
-                'form':form,
-            }
-            return render(request, 'login.html', context)
-    else:
-        return redirect('/')
-
-
 # REGISTRATION VIEW ENDPOINT
 class UserRegisterView(CreateView):
     model = MyUser
@@ -49,3 +27,10 @@ class UserRegisterView(CreateView):
 class UserLogoutView(LogoutView):
     template_name = 'base'
     next_page = '/'
+
+
+# LOGOUT VIEW ENDPOINT
+class UserLoginView(LoginView):
+    form_class = UserLoginForm
+    template_name = 'login.html'
+    redirect_authenticated_user = True
