@@ -49,3 +49,9 @@ class UserRegisterView(CreateView):
 class UserLogoutView(LogoutView):
     template_name = 'base'
     next_page = '/'
+
+
+class UserLoginView(LoginView):
+    form_class = UserLoginForm
+    template_name = 'login.html'
+    redirect_authenticated_user = True

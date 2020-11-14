@@ -131,5 +131,5 @@ STATICFILES_DIRS = [str(BASE_DIR / "static")]
 
 AUTH_USER_MODEL = "authentication.MyUser"
 
-# LOGIN_REDIRECT_URL = '/'
-# LOGIN_URL = 'auth/login/'
+LOGIN_REDIRECT_URL = 'posts'
+LOGIN_URL = 'login'
