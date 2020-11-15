@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'authentication',
+    'api',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +129,7 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [str(BASE_DIR / "static")]
 
+AUTH_USER_MODEL = "authentication.MyUser"
+
+LOGIN_REDIRECT_URL = 'posts'
+LOGIN_URL = 'login'
