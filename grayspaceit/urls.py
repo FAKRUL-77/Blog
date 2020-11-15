@@ -9,5 +9,5 @@ urlpatterns = [
     path('auth/', include('authentication.urls')),
     path('posts/', include('posts.urls')),
     path('api/', include('api.urls')),
-    path('', posts),
+    path('', posts, name='home'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
